@@ -11,7 +11,8 @@ if (-not (Test-Path -LiteralPath $compiler)) {
 
 $buildDirectory = Join-Path $PSScriptRoot 'build'
 [void](New-Item -ItemType Directory -Path $buildDirectory -Force)
-$executable = Join-Path $buildDirectory '下班关机.exe'
+$executableName = 'after-work-shutdown.exe'
+$executable = Join-Path $buildDirectory $executableName
 $manifest = Join-Path $PSScriptRoot 'app.manifest'
 $sourceFiles = @(Get-ChildItem -LiteralPath (Join-Path $PSScriptRoot 'src') -Filter '*.cs' | ForEach-Object { $_.FullName })
 $compilerArguments = @('/nologo', '/warn:4', '/warnaserror+', '/optimize+', '/codepage:65001',
@@ -19,7 +20,7 @@ $compilerArguments = @('/nologo', '/warn:4', '/warnaserror+', '/optimize+', '/co
 
 & $compiler @compilerArguments '/target:winexe' "/out:$executable" "/win32manifest:$manifest" @sourceFiles
 if ($LASTEXITCODE -ne 0) { throw 'Application compilation failed.' }
-Write-Output 'Build succeeded: build/下班关机.exe'
+Write-Output "Build succeeded: build/$executableName"
 
 if ($Test) {
     $testDirectory = Join-Path $buildDirectory 'tests'
