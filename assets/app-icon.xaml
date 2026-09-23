@@ -1,0 +1,44 @@
+<DrawingImage xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+  <DrawingImage.Drawing>
+    <DrawingGroup>
+      <GeometryDrawing Brush="Transparent" Geometry="M0,0 L256,0 256,256 0,256 Z" />
+      <GeometryDrawing Brush="#10467F">
+        <GeometryDrawing.Geometry>
+          <RectangleGeometry Rect="16,20,224,224" RadiusX="52" RadiusY="52" />
+        </GeometryDrawing.Geometry>
+      </GeometryDrawing>
+      <GeometryDrawing>
+        <GeometryDrawing.Brush>
+          <LinearGradientBrush StartPoint="0.15,0" EndPoint="0.8,1">
+            <GradientStop Color="#258BDD" Offset="0" />
+            <GradientStop Color="#1768AE" Offset="0.55" />
+            <GradientStop Color="#10467F" Offset="1" />
+          </LinearGradientBrush>
+        </GeometryDrawing.Brush>
+        <GeometryDrawing.Geometry>
+          <RectangleGeometry Rect="16,12,224,224" RadiusX="52" RadiusY="52" />
+        </GeometryDrawing.Geometry>
+      </GeometryDrawing>
+      <GeometryDrawing Geometry="M160,76 A60,60 0 1 1 88,76">
+        <GeometryDrawing.Pen>
+          <Pen Brush="#F6FBFF" Thickness="17" StartLineCap="Round" EndLineCap="Round" />
+        </GeometryDrawing.Pen>
+      </GeometryDrawing>
+      <GeometryDrawing Geometry="M124,52 L124,110">
+        <GeometryDrawing.Pen>
+          <Pen Brush="#F6FBFF" Thickness="17" StartLineCap="Round" EndLineCap="Round" />
+        </GeometryDrawing.Pen>
+      </GeometryDrawing>
+      <GeometryDrawing Geometry="M146,161 L169,184 211,138">
+        <GeometryDrawing.Pen>
+          <Pen Brush="#14548F" Thickness="31" StartLineCap="Round" EndLineCap="Round" LineJoin="Round" />
+        </GeometryDrawing.Pen>
+      </GeometryDrawing>
+      <GeometryDrawing Geometry="M146,161 L169,184 211,138">
+        <GeometryDrawing.Pen>
+          <Pen Brush="#64E3BF" Thickness="17" StartLineCap="Round" EndLineCap="Round" LineJoin="Round" />
+        </GeometryDrawing.Pen>
+      </GeometryDrawing>
+    </DrawingGroup>
+  </DrawingImage.Drawing>
+</DrawingImage>

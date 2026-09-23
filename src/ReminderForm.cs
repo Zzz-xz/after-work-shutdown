@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Windows.Forms;
 
 namespace AfterWork
@@ -14,6 +15,8 @@ namespace AfterWork
         private static readonly Color Accent = Color.FromArgb(28, 90, 139);
         private readonly Action requestShutdown;
         private readonly bool preview;
+        private readonly Stream iconStream;
+        private readonly Icon applicationIcon;
         private readonly Timer countdown = new Timer();
         private readonly List<Font> ownedFonts = new List<Font>();
         private readonly Label heading;
@@ -38,6 +41,21 @@ namespace AfterWork
 
             this.requestShutdown = requestShutdown;
             this.preview = preview;
+            iconStream = typeof(ReminderForm).Assembly.GetManifestResourceStream("AfterWork.AppIcon.ico");
+            if (iconStream == null)
+                throw new InvalidOperationException("缺少应用图标资源，请重新构建程序。");
+            try
+            {
+                applicationIcon = new Icon(iconStream);
+                Icon = applicationIcon;
+            }
+            catch
+            {
+                if (applicationIcon != null)
+                    applicationIcon.Dispose();
+                iconStream.Dispose();
+                throw;
+            }
             Text = preview ? "下班关机 · 预览（不会关机）" : "下班关机";
             Font = CreateFont(10F, FontStyle.Regular);
             AutoScaleDimensions = new SizeF(96F, 96F);
@@ -263,7 +281,7 @@ namespace AfterWork
             }
         }
 
-        /** @brief 释放倒计时资源，确保窗口关闭后不再触发后续操作。 */
+        /** @brief 释放计时器、字体及内嵌图标资源；图标流保持打开直到图标释放。 */
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -274,6 +292,10 @@ namespace AfterWork
                 foreach (Font font in ownedFonts)
                     font.Dispose();
                 ownedFonts.Clear();
+                if (applicationIcon != null)
+                    applicationIcon.Dispose();
+                if (iconStream != null)
+                    iconStream.Dispose();
             }
         }
     }

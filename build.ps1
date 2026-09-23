@@ -14,9 +14,14 @@ $buildDirectory = Join-Path $PSScriptRoot 'build'
 $executableName = 'after-work-shutdown.exe'
 $executable = Join-Path $buildDirectory $executableName
 $manifest = Join-Path $PSScriptRoot 'app.manifest'
+$iconPath = Join-Path $PSScriptRoot 'assets\app-icon.ico'
+if (-not (Test-Path -LiteralPath $iconPath -PathType Leaf)) {
+    throw 'Application icon is missing. Run tools/Build-Icon.ps1 first.'
+}
 $sourceFiles = @(Get-ChildItem -LiteralPath (Join-Path $PSScriptRoot 'src') -Filter '*.cs' | ForEach-Object { $_.FullName })
 $compilerArguments = @('/nologo', '/warn:4', '/warnaserror+', '/optimize+', '/codepage:65001',
-    '/reference:System.dll', '/reference:System.Drawing.dll', '/reference:System.Windows.Forms.dll')
+    '/reference:System.dll', '/reference:System.Drawing.dll', '/reference:System.Windows.Forms.dll',
+    "/win32icon:$iconPath", "/resource:$iconPath,AfterWork.AppIcon.ico")
 
 & $compiler @compilerArguments '/target:winexe' "/out:$executable" "/win32manifest:$manifest" @sourceFiles
 if ($LASTEXITCODE -ne 0) { throw 'Application compilation failed.' }

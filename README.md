@@ -1,3 +1,5 @@
+<img src="assets/app-icon.png" width="96" height="96" alt="下班关机图标">
+
 # 下班关机（After Work Shutdown）
 
 Windows 11 下班提醒工具：确认手机打卡后，启动可取消的关机倒计时，并提醒关机后拔掉电源插头。按需运行，关闭窗口即退出，无后台服务或开机启动项。
@@ -35,6 +37,16 @@ powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\build.ps1
 - `tests/ReminderTests.cs`：确认、取消、预览及错误恢复测试。
 
 倒计时由窗口管理，结束后调用 `shutdown.exe /s /t 0`。不使用系统倒计时，因为 `/t` 大于零会隐含 `/f`。[Windows 关机命令文档](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/shutdown)
+
+## 图标
+
+白色电源符号与青绿色完成勾表示“打卡完成后关机”。图标包含透明背景和 16–256 像素的 15 种尺寸，适配 Windows 11 常用缩放比例；已嵌入 EXE 和程序窗口，运行时无需外部图标文件。
+
+`assets/app-icon.xaml` 是矢量源文件，`app-icon.ico` 用于构建，`app-icon.png` 用于文档预览。修改矢量源文件后，运行以下命令生成资源，再重新构建程序：
+
+```powershell
+powershell.exe -NoProfile -STA -ExecutionPolicy Bypass -File .\tools\Build-Icon.ps1
+```
 
 ## 测试
 
