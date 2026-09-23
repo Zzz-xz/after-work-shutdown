@@ -1,6 +1,8 @@
-<img src="assets/app-icon.png" width="96" height="96" alt="下班关机图标">
+<p align="center">
+  <img src="assets/app-icon.png" width="96" height="96" alt="下班关机图标">
+</p>
 
-# 下班关机（After Work Shutdown）
+<h1 align="center">下班关机（After Work Shutdown）</h1>
 
 Windows 11 下班提醒工具：确认手机打卡后，启动可取消的关机倒计时，并提醒关机后拔掉电源插头。按需运行，关闭窗口即退出，无后台服务或开机启动项。
 
